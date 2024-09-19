@@ -1,24 +1,26 @@
-#ifndef UNION_FIND_H
-#define UNION_FIND_H
+#ifndef DS_UNION_FIND_H
+#define DS_UNION_FIND_H
 
-class UnionFind
+namespace dsa
 {
-private:
-    int* m_parent;
-    int* m_size;
-    int m_capacity;
-public:
-    UnionFind(int capacity);
+    class UnionFind
+    {
+    private:
+        int* m_parent;
+        int* m_size;
+        int m_capacity;
 
-    ~UnionFind();
+    public:
+        UnionFind(int capacity);
 
-    int GetRoot(int p);
+        ~UnionFind();
 
-    int GetSize(int p);
+        int GetRoot(int p);
+        int GetSize(int p);
+        bool Connected(int p, int q);
+        void Union(int p, int q);
+    };
+}
 
-    bool Connected(int p, int q);
-
-    void Union(int p, int q);
-};
 
 #endif

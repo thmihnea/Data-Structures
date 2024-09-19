@@ -1,5 +1,6 @@
 #include "UnionFind.h"
-#include <iostream>
+
+using namespace dsa;
 
 UnionFind::UnionFind(int capacity) : m_capacity(capacity)
 {
