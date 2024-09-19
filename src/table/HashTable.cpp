@@ -168,6 +168,7 @@ void HashTable<K, V>::Put(const K& key, const V& value)
     {
         this->m_bucket_size += 1;
     }
+    this->m_size += 1;
     node->SetNext(this->m_array[index]);
     this->m_array[index] = node;
 
