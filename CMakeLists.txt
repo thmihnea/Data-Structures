@@ -1,31 +1,27 @@
-# Minimum CMake version required
 cmake_minimum_required(VERSION 3.10)
-
-# Project name and version
-project(DataStructures VERSION 1.0)
+project(DataStructures)
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-# Base source directory
-set(SRC_DIR ${PROJECT_SOURCE_DIR}/src)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Include directories
-include_directories(${SRC_DIR})
-include_directories(${SRC_DIR}/collection)
-include_directories(${SRC_DIR}/connectivity)
-include_directories(${SRC_DIR}/sort)
-include_directories(${SRC_DIR}/table)
+include_directories(src)
 
-# Collect all source files
-set(SOURCES
-    ${SRC_DIR}/collection/Heap.cpp
-    ${SRC_DIR}/collection/Stack.cpp
-    ${SRC_DIR}/connectivity/UnionFind.cpp
-    ${SRC_DIR}/sort/Sort.cpp
-    ${SRC_DIR}/table/HashTable.cpp
+# Collect all non-template source files recursively
+file(GLOB_RECURSE SOURCES "src/*.cpp")
+
+# Exclude template implementation files (now `.tpp` or included in headers)
+list(REMOVE_ITEM SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/collection/Heap.tpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/collection/Stack.tpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/sort/Sort.tpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/table/HashTable.tpp"
 )
 
-# Add executable
-add_executable(data-structures ${SOURCES})
+# Add library target
+add_library(DataStructures STATIC ${SOURCES})
+
+# Optionally, add an executable for testing
+# add_executable(TestApp src/main.cpp)
+# target_link_libraries(TestApp PRIVATE DataStructures)
