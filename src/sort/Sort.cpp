@@ -1,4 +1,5 @@
 #include "Sort.h"
+#include "../collection/Heap.h"
 #include <cstdlib>
 
 template <typename T>
@@ -106,4 +107,26 @@ void dsa::qsort(T* array, int size)
 {
     shuffle(array, size);
     qsort_helper(array, 0, size - 1);
+}
+
+template <typename T>
+void dsa::hsort(T* array, int size)
+{
+    auto f = [](int x, int y)
+    {
+        if (x < y) return 1;
+        else if (x > y) return -1;
+        else return 0;
+    };
+
+    auto heap = Heap<int>(f);
+    for (int i = 0; i < size; i++)
+    {
+        heap.push(array[i]);
+    }
+
+    for (int i = size - 1; i >= 0; i--)
+    {
+        array[i] = heap.pop();
+    }
 }

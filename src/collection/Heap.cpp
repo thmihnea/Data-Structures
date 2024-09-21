@@ -1,6 +1,5 @@
 #include "Heap.h"
 #include <optional>
-#include <iostream>
 
 #define INITIAL_HEAP_SIZE 2
 

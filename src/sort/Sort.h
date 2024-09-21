@@ -14,6 +14,9 @@ namespace dsa
 
     template <typename T>
     void qsort(T* array, int size);
+
+    template <typename T>
+    void hsort(T* array, int size);
 }
 
 #endif
