@@ -8,7 +8,7 @@ using namespace dsa;
 template <typename T>
 Stack<T>::Stack() : m_size(0), m_max_size(INITIAL_STACK_SIZE)
 {
-    this->m_stack = new T[2];
+    this->m_stack = new T[INITIAL_STACK_SIZE];
 }
 
 template <typename T>
