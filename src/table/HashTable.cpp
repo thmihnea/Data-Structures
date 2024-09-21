@@ -145,7 +145,7 @@ const V& HashTable<K, V>::Get(const K& key)
         }
         current = current->GetNext();
     }
-    throw std::runtime_error("key not found!");
+    throw std::nullopt;
 }
 
 template <typename K, typename V>
