@@ -8,6 +8,7 @@ set(SOURCES
     graph/UndirectedGraph.cpp
     graph/EdgeWeightedGraph.cpp
     graph/EdgeWeightedDigraph.cpp
+    graph/FlowNetwork.cpp
 )
 
 add_executable(data-structures ${SOURCES})
