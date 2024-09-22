@@ -1,0 +1,4 @@
+#ifndef DS_EDGE_WEIGHTED_DIGRAPH_H
+#define DS_EDGE_WEIGHTED_DIGRAPH_H
+
+#endif

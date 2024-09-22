@@ -7,6 +7,7 @@ set(SOURCES
     sort/Sort.cpp
     graph/UndirectedGraph.cpp
     graph/EdgeWeightedGraph.cpp
+    graph/EdgeWeightedDigraph.cpp
 )
 
 add_executable(data-structures ${SOURCES})
