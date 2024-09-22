@@ -1,5 +1,4 @@
 #include "Stack.h"
-#include <iostream>
 
 #define INITIAL_STACK_SIZE 2
 

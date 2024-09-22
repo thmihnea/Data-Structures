@@ -3,7 +3,6 @@
 #include <queue>
 #include "../collection/Heap.h"
 #include "../connectivity/UnionFind.h"
-#include <iostream>
 
 using namespace dsa;
 
