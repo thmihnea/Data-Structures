@@ -111,4 +111,6 @@ std::queue<Edge> MinimumSpanningTree::prim()
         if (!visited[v]) visit(this->m_graph, visited, heap, v);
         if (!visited[w]) visit(this->m_graph, visited, heap, w);
     }
+
+    return tree;
 }
