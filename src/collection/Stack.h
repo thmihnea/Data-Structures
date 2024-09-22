@@ -27,4 +27,6 @@ namespace dsa
 };
 }
 
+#include "Heap.hpp"
+
 #endif

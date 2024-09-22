@@ -29,8 +29,14 @@ namespace dsa
 
         void push(const T& element);
 
+        int size();
+
+        bool empty();
+
         T pop();
 };
 }
+
+#include "Heap.hpp"
 
 #endif

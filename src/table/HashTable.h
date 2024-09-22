@@ -55,4 +55,6 @@ namespace dsa
     };
 }
 
+#include "HashTable.hpp"
+
 #endif

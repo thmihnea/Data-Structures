@@ -117,3 +117,15 @@ T Heap<T>::pop()
     this->resize();
     return element;
 }
+
+template <typename T>
+int Heap<T>::size()
+{
+    return this->m_size;
+}
+
+template <typename T>
+bool Heap<T>::empty()
+{
+    return this->m_size == 0;
+}
