@@ -1,6 +1,5 @@
 #include "StringProcessing.h"
 #include <vector>
-#include <iostream>
 #include "../sort/Sort.h"
 
 std::string lcp(std::string& a, std::string& b)

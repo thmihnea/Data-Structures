@@ -1,7 +1,6 @@
 #include "Sort.h"
 #include "../collection/Heap.h"
 #include <cstdlib>
-#include <iostream>
 #include <string>
 
 template <typename T>
