@@ -246,13 +246,6 @@ void dsa::msd_radix_sort(std::vector<std::string>& array)
     msd_sort_helper(array, aux, 0, array.size() - 1, 0);
 }
 
-static void str_exch(std::vector<std::string>& array, int i, int j)
-{
-    std::string& _temp = array[i];
-    array[i] = array[j];
-    array[j] = _temp;
-}
-
 static void radix_quicksort_helper(std::vector<std::string>& array, int low, int high, int d)
 {
     if (high <= low) return;
@@ -262,8 +255,8 @@ static void radix_quicksort_helper(std::vector<std::string>& array, int low, int
     while (i <= gt)
     {
         int t = char_at(array[i], d);
-        if (t < v) str_exch(array, lt++, i++);
-        else if (t > v) str_exch(array, i, gt--);
+        if (t < v) std::swap(array[lt++], array[i++]);
+        else if (t > v) std::swap(array[i], array[gt--]);
         else i++;
     }
 
