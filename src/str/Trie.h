@@ -3,6 +3,7 @@
 
 #include <string>
 #include <optional>
+#include <queue>
 
 namespace dsa
 {
@@ -44,6 +45,12 @@ namespace dsa
         std::optional<T> get(std::string key);
 
         bool contains(std::string key);
+
+        std::queue<std::string> keys();
+
+        std::queue<std::string> keys_with_prefix(std::string prefix);
+
+        std::string longest_prefix(std::string key);
     };
 }
 

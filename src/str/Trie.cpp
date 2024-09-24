@@ -104,3 +104,46 @@ bool Trie<T, R>::contains(std::string key)
 {
     return this->get(key) != std::nullopt;
 }
+
+template <typename T, int R>
+static void collect(Node<T, R>* x, std::string prefix, std::queue<std::string> &queue)
+{
+    if (x == nullptr) return;
+    if (x->value().has_value()) queue.push(prefix);
+    for (char c = 'a'; c < 'z'; c++)
+        collect(x->next()[c], prefix + c, queue);
+}
+
+template <typename T, int R>
+static int search(Node<T, R>* x, std::string key, int d, int length)
+{
+    if (x == nullptr) return length;
+    if (x->value().has_value()) length = d;
+    if (d == key.length()) return length;
+    char c = key.at(d);
+    return search(x->next()[c], key, d + 1, length);
+}
+
+template <typename T, int R>
+std::queue<std::string> Trie<T, R>::keys()
+{
+    std::queue<std::string> queue;
+    collect(this->m_root, "", queue);
+    return queue;
+}
+
+template <typename T, int R>
+std::queue<std::string> Trie<T, R>::keys_with_prefix(std::string prefix)
+{
+    std::queue<std::string> queue;
+    Node<T, R>* node = get_helper(this->m_root, prefix, 0);
+    collect(node, prefix, queue);
+    return queue;
+}
+
+template <typename T, int R>
+std::string Trie<T, R>::longest_prefix(std::string key)
+{
+    int length = search(this->m_root, key, 0, 0);
+    return key.substr(0, length);
+}

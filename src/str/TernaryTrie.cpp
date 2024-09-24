@@ -138,10 +138,3 @@ bool TernaryTrie<T>::contains(std::string key)
 {
     return this->get(key).has_value();
 }
-
-int main(int argc, char* argv[])
-{
-    auto trie = TernaryTrie<int>();
-    trie.put("asd", 2);
-    std::cout << trie.contains("asd");
-}
