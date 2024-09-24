@@ -1,6 +1,8 @@
 #include "Sort.h"
 #include "../collection/Heap.h"
 #include <cstdlib>
+#include <iostream>
+#include <string>
 
 template <typename T>
 static void swap(T* array, int i, int j)
@@ -129,4 +131,148 @@ void dsa::hsort(T* array, int size)
     {
         array[i] = heap.pop();
     }
+}
+
+template <typename T>
+void dsa::key_indexed_count(T* array, int size, int radix)
+{
+    // Performs a key indexed sort - requires no
+    // comparison between elements.
+    // Should be used when we have to sort an array
+    // of length N with at most R unique entries, with
+    // R << N.
+    // This is the basis of Radix Sort.
+    T *count = new T[radix + 1];
+
+    for (int i = 0; i < size; i++)
+    {
+        // Compute frequency of elements. Store the
+        // frequency of array[i] into position
+        // array[i] + 1.
+        count[array[i] + 1]++; 
+    }
+
+    for (int r = 0; r < radix; r++)
+    {
+        // Compute 'prefix counts'.
+        // If freq[1] = 2, freq[2] = 3, then
+        // freq[2] becomes 5.
+        // This tells us how many keys smaller than
+        // r there are.
+        count[r + 1] += count[r];
+    }
+
+    T* aux = new T[size];
+    for (int i = 0; i < size; i++)
+    {
+        aux[count[array[i]]++] = array[i];
+    }
+
+    for (int i = 0; i < size; i++)
+    {
+        array[i] = aux[i];
+    }
+
+    delete[] aux, count;
+}
+
+void dsa::lsd_radix_sort(std::vector<std::string>& array, int max_length)
+{
+    int radix = 256; // ASCII radix
+    int size = array.size();
+    std::vector<std::string> aux(size);
+
+    for (int d = max_length - 1; d >= 0; d--)
+    {
+        int* count = new int[radix + 1](); // Zero-initialize the count array
+        for (int i = 0; i < size; i++)
+        {
+            count[static_cast<unsigned char>(array[i][d]) + 1]++;
+        }
+        for (int r = 0; r < radix; r++)
+        {
+            count[r + 1] += count[r];
+        }
+        for (int i = 0; i < size; i++)
+        {
+            aux[count[static_cast<unsigned char>(array[i][d])]++] = array[i];
+        }
+        for (int i = 0; i < size; i++)
+        {
+            array[i] = aux[i];
+        }
+        delete[] count;
+    }
+}
+
+static int char_at(const std::string& s, int d)
+{
+    return d < s.size() ? static_cast<unsigned char>(s[d]) : -1;
+}
+
+static void msd_sort_helper(std::vector<std::string>& array, std::vector<std::string>& aux, int low, int high, int d)
+{
+    if (high <= low) return;
+    int radix = 256;
+    int* count = new int[radix + 2]();
+
+    for (int i = low; i <= high; i++)
+    {
+        int c = char_at(array[i], d);
+        count[c + 2]++;
+    }
+    for (int r = 0; r <= radix; r++)
+        count[r + 1] += count[r];
+    for (int i = low; i <= high; i++)
+    {
+        int c = char_at(array[i], d);
+        aux[count[c + 1]++] = array[i];
+    }
+
+    for (int i = low; i <= high; i++)
+        array[i] = aux[i - low];
+
+    for (int r = 0; r <= radix; r++)
+    {
+        msd_sort_helper(array, aux, low + count[r], low + count[r + 1] - 1, d + 1);
+    }
+
+    delete[] count;
+}
+
+void dsa::msd_radix_sort(std::vector<std::string>& array)
+{
+    std::vector<std::string> aux(array.size());
+    msd_sort_helper(array, aux, 0, array.size() - 1, 0);
+}
+
+static void str_exch(std::vector<std::string>& array, int i, int j)
+{
+    std::string& _temp = array[i];
+    array[i] = array[j];
+    array[j] = _temp;
+}
+
+static void radix_quicksort_helper(std::vector<std::string>& array, int low, int high, int d)
+{
+    if (high <= low) return;
+    int lt = low, gt = high;
+    int v = char_at(array[low], d);
+    int i = low + 1;
+    while (i <= gt)
+    {
+        int t = char_at(array[i], d);
+        if (t < v) str_exch(array, lt++, i++);
+        else if (t > v) str_exch(array, i, gt--);
+        else i++;
+    }
+
+    radix_quicksort_helper(array, low, lt - 1, d);
+    if (v >= 0) radix_quicksort_helper(array, lt, gt, d + 1);
+    radix_quicksort_helper(array, gt + 1, high, d);
+}
+
+void dsa::radix_quick_sort(std::vector<std::string>& array)
+{
+    radix_quicksort_helper(array, 0, array.size() - 1, 0);
 }

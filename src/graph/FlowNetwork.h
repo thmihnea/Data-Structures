@@ -2,6 +2,7 @@
 #define DS_FLOW_NETWORK_H
 
 #include <vector>
+#include <memory>
 
 namespace dsa
 {
@@ -15,6 +16,8 @@ namespace dsa
     
     public:
         FlowEdge(int v, int w, double capacity);
+
+        FlowEdge() = default;
 
         ~FlowEdge() = default;
 
