@@ -11,6 +11,7 @@ set(SOURCES
     graph/FlowNetwork.cpp
     str/StringProcessing.cpp
     str/Trie.cpp
+    str/TernaryTrie.cpp
 )
 
 add_executable(data-structures ${SOURCES})
