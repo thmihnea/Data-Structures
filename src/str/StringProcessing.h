@@ -6,6 +6,8 @@
 namespace dsa
 {
     std::string longest_repeating_substring(std::string &s);
+
+    int knuth_morris_pratt(std::string& text, std::string& pattern);
 }
 
 #endif
